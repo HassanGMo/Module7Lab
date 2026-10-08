@@ -1,0 +1,4 @@
+northwind.db
+Parse error in 5th command line argument: near "northwind": syntax error
+  northwind.db
+  ^--- error here
