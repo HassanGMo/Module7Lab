@@ -1,0 +1,66 @@
+-- Task 1: Retrieve columns. -- 
+SELECT CompanyName, Phone FROM Shippers;
+  CompanyName         Phone
+----------------  --------------
+Speedy Express    (503) 555-9831
+United Package    (503) 555-3199
+Federal Shipping  (503) 555-9931
+
+-- Task 2: Sort rows. --
+SELECT CompanyName, City, Country FROM Customers
+ORDER BY City LIMIT 5;
+       CompanyName             City      Country
+--------------------------  -----------  -------
+Wonderful Widgets                        USA
+My Company                               USA
+Drachenblut Delikatessen    Aachen       Germany
+Rattlesnake Canyon Grocery  Albuquerque  USA
+Old World Delicatessen      Anchorage    USA
+
+-- Task 3: Filter rows. --
+SELECT OrderID, OrderDate, ShipCity FROM Orders
+WHERE CustomerID = 'ANATR';
+OrderID  OrderDate    ShipCity
+-------  ----------  -----------
+  10308  1996-09-18  México D.F.
+  10625  1997-08-08  México D.F.
+  10759  1997-11-28  México D.F.
+  10926  1998-03-04  México D.F.
+
+-- Task 4: Join two tables. --
+SELECT c.CompanyName, o.OrderDate FROM Customers AS c
+JOIN Orders AS o ON c.CustomerID = o.CustomerID
+WHERE c.CompanyName = 'Around the Horn' LIMIT 5;
+  CompanyName    OrderDate
+---------------  ----------
+Around the Horn  1996-11-15
+Around the Horn  1996-12-16
+Around the Horn  1997-02-21
+Around the Horn  1997-06-04
+Around the Horn  1997-10-16
+
+-- Task 5: Add a row. --
+DELETE FROM Customers WHERE CustomerID = 'STUD1';
+
+INSERT INTO Customers (CustomerID, ContactName, CompanyName, Country)
+VALUES ('STUD1', 'Hassan Mohamed', 'My Company', 'USA');
+
+SELECT * FROM Customers WHERE CustomerID = 'STUD1';
+CustomerID  CompanyName   ContactName    ContactTitle  Address  City  Region  PostalCode  Country  Phone  Fax
+----------  -----------  --------------  ------------  -------  ----  ------  ----------  -------  -----  ---
+STUD1       My Company   Hassan Mohamed                                                   USA
+
+-- Task 6: Change a row. --
+UPDATE Customers SET Phone = '555-0100'
+WHERE CustomerID = 'STUD1';
+
+SELECT CustomerID, ContactName, Phone FROM Customers
+WHERE CustomerID = 'STUD1';
+CustomerID   ContactName     Phone
+----------  --------------  --------
+STUD1       Hassan Mohamed  555-0100
+
+-- Task 7: Remove a row. --
+DELETE FROM Customers WHERE CustomerID = 'STUD1';
+
+SELECT * FROM Customers WHERE CustomerID = 'STUD1';
